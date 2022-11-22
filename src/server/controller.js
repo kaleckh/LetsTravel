@@ -33,6 +33,7 @@ let newperson = (req, res) => {
 };
 
 let editdetails = (req, res) => {
+
 const dbInstance = req.app.get("db");
 dbInstance
 .edit_person([req.body.firstname, req.body.lastname, req.body.hometown, req.body.location, req.params.id])
@@ -46,15 +47,24 @@ dbInstance
     })
 })
 }
-// let deletePerson = (req, res) => {
-//     const dbInstance = req.app.get("db")
-//     dbInstance
-//     .delete_person
-// }
-
+let deleteperson = (req, res) => {
+    const dbInstance = req.app.get("db")
+    dbInstance
+    .delete_person([req.params.id])
+    .then((peopletravelling) => {
+        res.status(200).send(peopletravelling);
+    })
+    .catch((err) => {
+        res.status(500).send({
+            errorMessage:
+            err
+        })    
+    })
+   
+}
 module.exports = {
   getpeople,
   newperson,
-  editdetails
-  
+  editdetails,
+  deleteperson
 };

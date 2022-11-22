@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const massive = require("massive"); 
 const bodyParser = require('body-parser'); 
-var {getpeople, newperson, editdetails } = require("./controller")          
+var {getpeople, newperson, editdetails, deleteperson } = require("./controller")          
 const app = express();
 app.use(express.json());
 const { PORT = 3001 } = process.env;
@@ -26,6 +26,7 @@ massive({
     app.get("/people", getpeople)
     app.post("/newperson", newperson)
     app.put("/editperson/:id", editdetails)
+    app.delete("/deleteperson/:id", deleteperson)
     
 
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
