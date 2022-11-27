@@ -1,0 +1,17 @@
+.box {
+    height: 300px;
+    background-color: black;
+    width: 300px;
+    margin: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.loginInput {
+    width: 200px;
+    margin: 15px;
+    height: 25px;
+}
