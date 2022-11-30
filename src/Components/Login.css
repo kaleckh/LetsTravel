@@ -1,7 +1,8 @@
 .box {
     height: 300px;
     background-color: aquamarine;
-    color: white;
+    color: black;
+    font-size: x-large;
     width: 300px;
     margin: 100px;
     display: flex;

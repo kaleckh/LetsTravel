@@ -1,0 +1,25 @@
+.personContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.personBox {
+    height: 750px;
+    width: 600px;
+    background-color: black;
+    border-radius: 35px;
+}
+
+.profileToggleContainer {
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    color: aliceblue;
+}
+
+.profileToggleBox {
+    background-color: black;
+    width: 85px;
+    padding-left: 10px;
+}

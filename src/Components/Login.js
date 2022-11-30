@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../Firebase";
+import { useNavigate } from 'react-router-dom';
 function Login() {
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
@@ -27,8 +28,8 @@ function Login() {
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
-        loginEmail,
-        loginPassword
+        registerEmail,
+        registerPassword
       );
     } catch (error) {
       console.log(error.message);
@@ -47,10 +48,10 @@ function Login() {
     }
   };
 
-  const logout = async () => {
-    await signOut(auth);
-  };
-
+  // const logout = async () => {
+  //   await signOut(auth);
+  // };
+  const Navigate = useNavigate()
   return (
     <div>
       {!createAccount ? (
@@ -72,7 +73,10 @@ function Login() {
                 setLoginPassword(event.target.value);
               }}
             />
-            <button onClick={register} className="">
+            <button onClick={() => {
+                login()
+                Navigate(`/person/${auth.currentUser.email}`)
+            }} className="">
               Login
             </button>
             <button
@@ -89,8 +93,20 @@ function Login() {
       ) : (
         <div className="container">
           <div className="box">
-            <input type="text" />
-            <input type="text" />
+            <div onClick={() => {
+              setCreateAccount(!createAccount)
+            }}>Back</div>
+            <div>Create Account!</div>
+            <input onChange={(event) => {
+              setRegisterEmail(event.target.value)
+            }} className="loginInput" type="text" />
+            <input onChange={(event) => {
+              setRegisterPassword(event.target.value)
+            }} className="loginInput" type="text" />
+            <button onClick={() => {
+              register()
+              Navigate(`/person/${auth.currentUser.email}`)
+            }}>Create Account!</button>
           </div>
         </div>
       )}
