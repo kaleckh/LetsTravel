@@ -3,12 +3,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
 import { Link, useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../Firebase";
+
 
 function Home() {
   const navigate = useNavigate();
   const [people, setPeople] = useState([]);
   const [createTrip, setCreateTrip] = useState(true);
   const [profileToggle, setProfileToggle] = useState(false);
+  console.log(auth.currentUser, "this is my current user")
+
+  
+  const logout = async () => {
+    await signOut(auth);
+  };
 
   let changedData = people.map((person) => {
     return {
@@ -32,15 +41,24 @@ function Home() {
         <>
           <header className="header">
             <div className="headerItem">Create a trip</div>
-            <div onClick={() => {
-              setProfileToggle(!profileToggle)
-            }} className="headerItem">My Profile</div>
+            <div
+              onClick={() => {
+                setProfileToggle(!profileToggle);
+              }}
+              className="headerItem"
+            >
+              My Profile
+            </div>
           </header>
           {profileToggle ? (
             <div className="profileToggleContainer">
               <div className="profileToggleBox">
-                <div>My trips</div>
-                <div>Logout</div>
+                <div onClick={() => {
+                  navigate(`/myTrips/${auth.currentUser.uid}`)
+                }}>My trips</div>
+                <div onClick={() => {
+                  logout()
+                  navigate('/login')}}>Logout</div>
               </div>
             </div>
           ) : null}
@@ -50,7 +68,7 @@ function Home() {
               className="input"
               options={changedData}
               onChange={(obj) => {
-                console.log(obj);
+                
               }}
             />
           </div>

@@ -48,9 +48,7 @@ function Login() {
     }
   };
 
-  // const logout = async () => {
-  //   await signOut(auth);
-  // };
+  
   const Navigate = useNavigate()
   return (
     <div>
@@ -75,7 +73,7 @@ function Login() {
             />
             <button onClick={() => {
                 login()
-                Navigate(`/person/${auth.currentUser.email}`)
+                Navigate(`/person/${auth.currentUser.uid}`)
             }} className="">
               Login
             </button>
