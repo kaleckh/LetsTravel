@@ -7,7 +7,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../Firebase";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 function Login() {
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
@@ -15,6 +16,8 @@ function Login() {
   const [loginPassword, setLoginPassword] = useState("");
   const [user, setUser] = useState({});
   const [createAccount, setCreateAccount] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   useEffect(() => {
     if (auth?.currentUser?.email) {
@@ -24,9 +27,21 @@ function Login() {
     }
   }, [auth?.currentUser?.email]);
 
+  const handleSubmit = async (firstname, lastname, email) => {
+    try{
+    return await axios.post("http://localhost:3001/newperson", {
+      firstname: firstName,
+      lastname: lastName,
+      email: registerEmail,
+    });
+  } catch (error) {
+    console.log(error.message)
+  }
+  } 
+
   const register = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
+     return await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
@@ -48,8 +63,7 @@ function Login() {
     }
   };
 
-  
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
   return (
     <div>
       {!createAccount ? (
@@ -71,16 +85,18 @@ function Login() {
                 setLoginPassword(event.target.value);
               }}
             />
-            <button onClick={() => {
-                login()
-                Navigate(`/person/${auth.currentUser.uid}`)
-            }} className="">
+            <button
+              onClick={() => {
+                login();
+                Navigate(`/person/${auth.currentUser.uid}`);
+              }}
+              className=""
+            >
               Login
             </button>
             <button
               onClick={() => {
                 setCreateAccount(!createAccount);
-                
               }}
             >
               Create Account
@@ -91,20 +107,50 @@ function Login() {
       ) : (
         <div className="container">
           <div className="box">
-            <div onClick={() => {
-              setCreateAccount(!createAccount)
-            }}>Back</div>
+            <div
+              onClick={() => {
+                setCreateAccount(!createAccount);
+              }}
+            >
+              Back
+            </div>
             <div>Create Account!</div>
-            <input onChange={(event) => {
-              setRegisterEmail(event.target.value)
-            }} className="loginInput" type="text" />
-            <input onChange={(event) => {
-              setRegisterPassword(event.target.value)
-            }} className="loginInput" type="text" />
-            <button onClick={() => {
-              register()
-              Navigate(`/person/${auth.currentUser.email}`)
-            }}>Create Account!</button>
+            <input
+              onChange={(event) => {
+                setFirstName(event.target.value);
+              }}
+              type="text"
+            />
+            <input
+              onChange={(event) => {
+                setLastName(event.target.value);
+              }}
+              type="text"
+            />
+            <input
+              onChange={(event) => {
+                setRegisterEmail(event.target.value);
+              }}
+              className="loginInput"
+              type="text"
+            />
+            <input
+              onChange={(event) => {
+                setRegisterPassword(event.target.value);
+              }}
+              className="loginInput"
+              type="text"
+            />
+            <button
+              onClick={() => {
+                Promise.all([handleSubmit(), register()]).then(() => {
+                  Navigate(`/person/${auth.currentUser.email}`);
+                });
+                console.log(handleSubmit(), register())
+              }}
+            >
+              Create Account!
+            </button>
           </div>
         </div>
       )}

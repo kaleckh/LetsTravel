@@ -1,1 +1,1 @@
-insert into peopletravelling(firstname, lastname, hometown, location) values($1,$2,$3,$4) returning *
+insert into peopletravelling(firstname, lastname, email) values($1,$2,$3) returning *

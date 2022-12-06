@@ -6,6 +6,13 @@
 .tripBox {
     height: 500px;
     width: 500px;
-    background-color: black;
+    background-color: aqua;
     border-radius: 25px;
+}
+
+.trip {
+    height: 50px;
+    box-sizing: border-box;
+    margin: 3px;
+    border: 1px solid;
 }

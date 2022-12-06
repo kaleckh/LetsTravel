@@ -12,7 +12,7 @@ function Home() {
   const [people, setPeople] = useState([]);
   const [createTrip, setCreateTrip] = useState(true);
   const [profileToggle, setProfileToggle] = useState(false);
-  console.log(auth.currentUser, "this is my current user")
+  
 
   
   const logout = async () => {
@@ -22,16 +22,16 @@ function Home() {
   let changedData = people.map((person) => {
     return {
       value: person.id,
-      label: `${person.firstname},${person.location}`,
+      label: `${person.firstname}`,
     };
   });
 
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/people`,
+      url: `http://localhost:3001/personTrips/${auth.currentUser.displayName}`,
     }).then((res) => {
-      setPeople(res.data);
+      setCreateTrip(res.data)
     });
   }, []);
 
@@ -54,7 +54,7 @@ function Home() {
             <div className="profileToggleContainer">
               <div className="profileToggleBox">
                 <div onClick={() => {
-                  navigate(`/myTrips/${auth.currentUser.uid}`)
+                  navigate(`/myTrips/${auth.currentUser.email}`)
                 }}>My trips</div>
                 <div onClick={() => {
                   logout()

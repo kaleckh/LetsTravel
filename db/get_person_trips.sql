@@ -1,1 +1,1 @@
-select * from peopletravelling where id = $1
+select * from peopletravelling where email = $1

@@ -24,7 +24,7 @@ massive({
     .catch((err) => console.log(err));
     
     app.get("/people", getpeople)
-    app.get("/personTrips/:id", getPersonTrips)
+    app.get("/personTrips/:email", getPersonTrips)
     app.post("/newperson", newperson)
     app.put("/editperson/:id", editdetails)
     app.delete("/deleteperson/:id", deleteperson)

@@ -8,26 +8,29 @@ import { useLocation } from "react-router-dom";
 
 function MyTrips() {
   const [profileToggle, setProfileToggle] = useState(false);
+  const [myTrips, setMyTrips] = useState("");
+  const [myId, setMyId] = useState("")
+
   const navigate = useNavigate();
-  const [people, setPeople] = useState("");
   const { search } = useLocation();
   const params = new URLSearchParams(search);
-  console.log(search, "search");
 
-
-  
   const logout = async () => {
     await signOut(auth);
   };
-  
 
   useEffect(() => {
-    console.log(auth.currentUser, "this is the uids")
     axios({
       method: "get",
-    url: `http://localhost:3001/personTrips/${auth.currentUser.uid}`,
+      url: `http://localhost:3001/personTrips/${auth.currentUser.email}`,
     }).then((res) => {
-      setPeople(res.data);
+      setMyId(res.data.id);
+      axios({
+        method: "get",
+        url: `http://localhost:3001/personalTrips/${myId}`
+      }).then((res) => {
+        setMyTrips(res.data)
+      })
     });
   }, []);
 
@@ -66,7 +69,11 @@ function MyTrips() {
         </div>
       ) : null}
       <div className="tripContainer">
-        <div className="tripBox"></div>
+        <div className="tripBox">
+          {/* {myTrips.map((trip) => {
+            return <div className="trip">{auth.currentUser.email}</div>;
+          })} */}
+        </div>
       </div>
     </div>
   );

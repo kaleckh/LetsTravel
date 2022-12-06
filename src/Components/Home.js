@@ -33,7 +33,7 @@ function Home() {
         <div className="main">Where do you wanna go?</div>
         <div className="container">
           <Select className="input" options={changedData} onChange={(obj) => {
-            console.log(obj)
+            
           }}/>
         </div>
       </div>

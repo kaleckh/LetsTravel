@@ -15,9 +15,9 @@ let getpeople = (req, res) => {
 };
 let getPersonTrips = (req, res) => {
   const dbInstance = req.app.get("db");
-
+console.log(req)
   dbInstance
-    .get_person_trips([req.body.id])
+    .get_person_trips([req.params.email])
     .then((peopletravelling) => res.status(200).send(peopletravelling))
     .catch((err) => {
       res.status(500).send({
@@ -27,14 +27,10 @@ let getPersonTrips = (req, res) => {
     });
 };
 let newperson = (req, res) => {
+  console.log(req)
   const dbInstance = req.app.get("db");
   dbInstance
-    .new_person([
-      req.body.firstname,
-      req.body.lastname,
-      req.body.hometown,
-      req.body.location,
-    ])
+    .new_person([req.body.firstname, req.body.lastname, req.body.email])
     .then((peopletravelling) => {
       res.status(200).send(peopletravelling);
     })
