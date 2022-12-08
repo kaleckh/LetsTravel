@@ -13,7 +13,7 @@ export default (
       <Route path="/home" element={<Home/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/person/:id" element={<Person/>}/>
-      <Route path="/myTrips/:email" element={<MyTrips/>}/>
+      <Route path="/myTrips/:id" element={<MyTrips/>}/>
     </Routes>
   </BrowserRouter>
 );

@@ -48,13 +48,13 @@ function Home() {
               className="headerItem"
             >
               My Profile
-            </div>
+            </div> 
           </header>
           {profileToggle ? (
             <div className="profileToggleContainer">
               <div className="profileToggleBox">
                 <div onClick={() => {
-                  navigate(`/myTrips/${auth.currentUser.email}`)
+                  navigate(`/myTrips/${auth.currentUser.uid}`)
                 }}>My trips</div>
                 <div onClick={() => {
                   logout()

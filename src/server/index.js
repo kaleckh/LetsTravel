@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const massive = require("massive"); 
 const bodyParser = require('body-parser'); 
-var {getpeople, newperson, editdetails, deleteperson, getPersonTrips } = require("./controller")          
+var {getpeople, newperson, editdetails, deleteperson, getPerson, getPersonTrips } = require("./controller")          
 const app = express();
 app.use(express.json());
 const { PORT = 3001 } = process.env;
@@ -24,7 +24,8 @@ massive({
     .catch((err) => console.log(err));
     
     app.get("/people", getpeople)
-    app.get("/personTrips/:email", getPersonTrips)
+    app.get("/person/:email", getPerson)
+    app.get("/personTrips/:id", getPersonTrips)
     app.post("/newperson", newperson)
     app.put("/editperson/:id", editdetails)
     app.delete("/deleteperson/:id", deleteperson)

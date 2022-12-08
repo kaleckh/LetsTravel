@@ -9,7 +9,10 @@ import { useLocation } from "react-router-dom";
 function MyTrips() {
   const [profileToggle, setProfileToggle] = useState(false);
   const [myTrips, setMyTrips] = useState("");
-  const [myId, setMyId] = useState("")
+  const [myId, setMyId] = useState("");
+  const [tripToggle, setTripToggle] = useState(true);
+  const [tripLocation, setTripLocation] = useState("");
+  const [tripDates, setTripDates] = useState("");
 
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -22,59 +25,61 @@ function MyTrips() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/personTrips/${auth.currentUser.email}`,
+      url: `http://localhost:3001/person/${auth.currentUser.email}`,
     }).then((res) => {
-      setMyId(res.data.id);
       axios({
         method: "get",
-        url: `http://localhost:3001/personalTrips/${myId}`
+        url: `http://localhost:3001/personTrips/${res.data[0].id}`,
       }).then((res) => {
-        setMyTrips(res.data)
-      })
+        setMyTrips(res.data);
+        });
     });
   }, []);
+  
+ 
 
   return (
+    
     <div>
       <header className="header">
-        <div className="headerItem">Create a trip</div>
         <div
-          onClick={() => {
-            setProfileToggle(!profileToggle);
+          onClick={(event) => {
+            setTripToggle(!tripToggle);
           }}
           className="headerItem"
         >
-          My Profile
+          Create a trip
         </div>
+        <div className="headerItem">My Profile</div>
       </header>
-      {profileToggle ? (
-        <div className="profileToggleContainer">
-          <div className="profileToggleBox">
-            <div
-              onClick={() => {
-                navigate("/myTrips");
-              }}
-            >
-              My trips
-            </div>
-            <div
-              onClick={(event) => {
-                logout();
-                navigate("/login");
-              }}
-            >
-              Logout
-            </div>
+      {tripToggle ? (
+        <div className="tripContainer">
+          <div onClick={() => {
+            console.log(myTrips)
+          }} className="tripBox">
+            {myTrips.map((trip) => {
+              return <div>{trip.trip_location}</div>
+            })}
           </div>
         </div>
-      ) : null}
-      <div className="tripContainer">
-        <div className="tripBox">
-          {/* {myTrips.map((trip) => {
-            return <div className="trip">{auth.currentUser.email}</div>;
-          })} */}
+      ) : (
+        <div className="tripContainer">
+          <div className="tripBox">
+            <input
+              onChange={(event) => {
+                setTripLocation(event.target.value);
+              }}
+              type="text"
+            />
+            <input
+              onChange={(event) => {
+                setTripDates(event.target.value);
+              }}
+              type="text"
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

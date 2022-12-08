@@ -13,11 +13,24 @@ let getpeople = (req, res) => {
       console.log(err);
     });
 };
+let getPerson = (req, res) => {
+  const dbInstance = req.app.get("db");
+  console.log(req);
+  dbInstance
+    .get_person([req.params.email])
+    .then((peopletravelling) => res.status(200).send(peopletravelling))
+    .catch((err) => {
+      res.status(500).send({
+        errorMessage: "somethin aint right",
+      });
+      console.log(err);
+    });
+};
 let getPersonTrips = (req, res) => {
   const dbInstance = req.app.get("db");
-console.log(req)
+  console.log(req.params.id);
   dbInstance
-    .get_person_trips([req.params.email])
+    .get_person_trips([req.params.id])
     .then((peopletravelling) => res.status(200).send(peopletravelling))
     .catch((err) => {
       res.status(500).send({
@@ -27,7 +40,7 @@ console.log(req)
     });
 };
 let newperson = (req, res) => {
-  console.log(req)
+  console.log(req);
   const dbInstance = req.app.get("db");
   dbInstance
     .new_person([req.body.firstname, req.body.lastname, req.body.email])
@@ -80,5 +93,6 @@ module.exports = {
   newperson,
   editdetails,
   deleteperson,
-  getPersonTrips,
+  getPerson,
+  getPersonTrips
 };
