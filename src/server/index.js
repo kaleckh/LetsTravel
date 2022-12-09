@@ -27,6 +27,7 @@ massive({
     app.get("/person/:email", getPerson)
     app.get("/personTrips/:id", getPersonTrips)
     app.post("/newperson", newperson)
+    app.post("/newperson", newperson)
     app.put("/editperson/:id", editdetails)
     app.delete("/deleteperson/:id", deleteperson)
     
