@@ -55,6 +55,22 @@ let newperson = (req, res) => {
       console.log(err);
     });
 };
+let newTrip = (req, res) => {
+  console.log(req);
+  const dbInstance = req.app.get("db");
+  dbInstance
+    .new_trip([req.body.id, req.body.location, req.body.dates])
+    .then((trips) => {
+      res.status(200).send(trips);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        errorMessage:
+          "Oops! Something went wrong. Our engineers have been informed!",
+      });
+      console.log(err);
+    });
+};
 
 let editdetails = (req, res) => {
   const dbInstance = req.app.get("db");
@@ -88,11 +104,26 @@ let deleteperson = (req, res) => {
       });
     });
 };
+let deletetrip = (req, res) => {
+  const dbInstance = req.app.get("db");
+  dbInstance
+    .delete_trip([req.params.id])
+    .then((trips) => {
+      res.status(200).send(trips);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        errorMessage: err,
+      });
+    });
+};
 module.exports = {
   getpeople,
   newperson,
   editdetails,
   deleteperson,
   getPerson,
-  getPersonTrips
+  getPersonTrips,
+  newTrip,
+  deletetrip
 };

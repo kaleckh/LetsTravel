@@ -1,18 +1,61 @@
 .tripContainer {
     display: flex;
     justify-content: center;
-}
-
-.tripBox {
-    height: 500px;
-    width: 500px;
-    background-color: aqua;
-    border-radius: 25px;
+    height: 80vh;
+    width: 100vw;
+    align-items: center;
+    flex-direction: column;
 }
 
 .trip {
-    height: 50px;
+    height: 25px;
+    width: 700px;
     box-sizing: border-box;
-    margin: 3px;
+    margin: 10px;
     border: 1px solid;
+}
+
+.bigTags {
+    font-size: 65px;
+}
+
+.headerButtonContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.home {
+    margin: 10px;
+    font-size: x-large;
+}
+
+.createTripContainer {
+    display: flex;
+    width: 100vw;
+    height: 40vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.createTripBox {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 12px;
+    margin: 20px;
+    border-radius: 3px;
+    width: 600px;
+    height: 30px;
+}
+
+button {
+    border-radius: 3px;
+    font-size: 0.9rem;
+    background: #4c5fd5;
+    color: white;
+    border: solid 1px black;
+    text-shadow: 0 1px 0 gray;
 }
