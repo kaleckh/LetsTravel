@@ -1,14 +1,5 @@
-.personContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.personBox {
-    height: 750px;
-    width: 600px;
-    background-color: black;
-    border-radius: 35px;
+.mainInput {
+    width: 1000px;
 }
 
 .profileToggleContainer {
@@ -22,4 +13,37 @@
     background-color: black;
     width: 85px;
     padding-left: 10px;
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainBox {
+    background-image: url("../china-wall.jpg");
+    width: 95vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    border-style: solid;
+    border: 1px black;
+    margin: 20px;
+}
+
+.bottomContainer {
+    width: 1400px;
+    background-color: black;
+    height: 200px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: x-large;
+    font-family: inherit;
+    margin: 20px;
+    border-radius: 25px;
 }

@@ -7,12 +7,10 @@
     flex-direction: column;
 }
 
-.trip {
-    height: 25px;
-    width: 700px;
-    box-sizing: border-box;
-    margin: 10px;
-    border: 1px solid;
+.backWrapper {
+    display: flex;
+    width: 630px;
+    justify-content: flex-start;
 }
 
 .bigTags {
@@ -38,11 +36,6 @@
     flex-direction: column;
 }
 
-.createTripBox {
-    display: flex;
-    flex-direction: column;
-}
-
 input {
     padding: 12px;
     margin: 20px;
@@ -58,4 +51,31 @@ button {
     color: white;
     border: solid 1px black;
     text-shadow: 0 1px 0 gray;
+}
+
+.back {
+    border-radius: 3px;
+    font-size: 0.9rem;
+    background: none;
+    color: black;
+    border: none;
+    text-shadow: 0 1px 0 gray;
+}
+
+.trip {
+    height: 25px;
+    width: 700px;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 1px solid;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+}
+
+.tripBox {
+    display: flex;
 }

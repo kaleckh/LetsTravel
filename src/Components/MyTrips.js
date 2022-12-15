@@ -18,7 +18,7 @@ function MyTrips() {
   const [isAddingTrip, setIsAddingTrip] = useState(true);
   const [isSettingDate, setIsSettingDate] = useState(false);
 
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
   const { search } = useLocation();
   const params = new URLSearchParams(search);
 
@@ -69,7 +69,14 @@ function MyTrips() {
   return (
     <div>
       <header className="header">
-        <div className="home">Home</div>
+        <div
+          onClick={() => {
+            Navigate(`/person/${auth.currentUser.uid}`);
+          }}
+          className="home"
+        >
+          Home
+        </div>
         <div className="headerButtonContainer">
           <div
             onClick={(event) => {
@@ -101,8 +108,11 @@ function MyTrips() {
                   {myTrips.map((trip) => {
                     return (
                       <div className="tripBox">
-                        <div className="trip">
-                          {trip.trip_location} {trip.trip_dates}
+                        <div onClick={() => {
+                          Navigate(`/trip/${trip.id}`)
+                        }} className="trip">
+                          <div>{trip.trip_location}</div>
+                          <div>{trip.trip_dates}</div>
                         </div>
                         <>
                           <button>edit trip</button>
@@ -113,7 +123,6 @@ function MyTrips() {
                           >
                             delete trip
                           </button>
-                          ;
                         </>
                       </div>
                     );
@@ -125,7 +134,17 @@ function MyTrips() {
         ))}
       {isSettingLocation && (
         <div className="tripContainer">
-          <button className="back">back</button>
+          <div className="backWrapper">
+            <button
+              onClick={() => {
+                setIsAddingTrip(true);
+                setIsSettingLocation(false);
+              }}
+              className="back"
+            >
+              back
+            </button>
+          </div>
           <input
             placeholder="Where are you going?"
             onChange={(event) => {
@@ -138,12 +157,24 @@ function MyTrips() {
               setIsSettingDate(true);
               setIsSettingLocation(false);
             }}
-          >Next!</button>
+          >
+            Next!
+          </button>
         </div>
       )}
       {isSettingDate && (
         <div className="tripContainer">
-          <button className="back">Back</button>
+          <div className="backWrapper">
+            <button
+              onClick={() => {
+                setIsSettingDate(false);
+                setIsSettingLocation(true);
+              }}
+              className="back"
+            >
+              back
+            </button>
+          </div>
           <input
             placeholder="What are the dates?"
             onChange={(event) => {
@@ -159,7 +190,9 @@ function MyTrips() {
                 }
               );
             }}
-          >Create Trip!</button>
+          >
+            Create Trip!
+          </button>
         </div>
       )}
     </div>
