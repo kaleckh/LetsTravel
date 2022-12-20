@@ -1,10 +1,16 @@
+@font-face {
+    font-family: 'Anton';
+    src: url(../Anton-Regular.ttf)
+}
+
 .tripContainer {
     display: flex;
-    justify-content: center;
     height: 80vh;
     width: 100vw;
     align-items: center;
     flex-direction: column;
+    background-image: url('../actualResized.jpeg');
+    /* image-rendering: -webkit-optimize-contrast; */
 }
 
 .backWrapper {
@@ -17,14 +23,27 @@
     font-size: 65px;
 }
 
+.title {
+    font-size: 50px;
+    text-decoration: underline;
+    margin: 30px;
+    font-family: Anton;
+    font-weight: 300;
+}
+
 .headerButtonContainer {
     display: flex;
     flex-direction: row;
+    margin-right: 50px;
+    width: 400px;
+    justify-content: space-between;
 }
 
 .home {
     margin: 10px;
-    font-size: x-large;
+    font-size: large;
+    font-weight: bold;
+    margin-left: 20px;
 }
 
 .createTripContainer {
@@ -62,20 +81,42 @@ button {
     text-shadow: 0 1px 0 gray;
 }
 
-.trip {
-    height: 25px;
-    width: 700px;
+.tripDate {
+    width: 150px;
     box-sizing: border-box;
-    margin: 10px;
-    border: 1px solid;
+    margin-top: 10px;
     height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    background-color: white;
+    background-color: #bec7c9;
+    border-radius: 8px;
+    font-family: "Anton";
+    font-weight: bold;
+}
+
+.tripLocation {
+    height: 45px;
+    width: 250px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #8b9da3;
+    font-size: larger;
+    font-family: "Anton";
+    font-weight: bolder;
 }
 
 .tripBox {
     display: flex;
+}
+
+.showTripContainer {
+    width: 1000px;
 }

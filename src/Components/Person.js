@@ -74,15 +74,16 @@ function Home() {
               }}
               className="headerItem"
             >
-              Create a trip
+              CREATE A TRIP
             </div>
+            <div className="headerItem">MY TRIPS</div>
             <div
               onClick={() => {
                 setProfileToggle(!profileToggle);
               }}
               className="headerItem"
             >
-              My Profile
+              MY PROFILE
             </div>
           </div>
         </header>
@@ -112,6 +113,7 @@ function Home() {
       {createTrip ? (
         <div className="mainContainer">
           <div className="mainBox">
+            <div className="title">Where are you going?</div>
             <Select
               className="mainInput"
               options={changedData}

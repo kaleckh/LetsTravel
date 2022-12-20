@@ -75,7 +75,7 @@ function MyTrips() {
           }}
           className="home"
         >
-          Home
+          HOME
         </div>
         <div className="headerButtonContainer">
           <div
@@ -85,9 +85,10 @@ function MyTrips() {
             }}
             className="headerItem"
           >
-            Create a trip
+            CREATE A TRIP
           </div>
-          <div className="headerItem">My Profile</div>
+          <div className="headerItem">MY PROFILE</div>
+          <div className="headerItem">MY TRIPS</div>
         </div>
       </header>
       {isAddingTrip &&
@@ -96,6 +97,7 @@ function MyTrips() {
         ) : (
           <div>
             <div className="tripContainer">
+              <div className="title">Current Trips</div>
               {myTrips.length === 0 ? (
                 <>
                   <div className="bigTags">
@@ -107,28 +109,33 @@ function MyTrips() {
                 <>
                   {myTrips.map((trip) => {
                     return (
-                      <div className="tripBox">
-                        <div onClick={() => {
-                          Navigate(`/trip/${trip.id}`)
-                        }} className="trip">
-                          <div>{trip.trip_location}</div>
-                          <div>{trip.trip_dates}</div>
-                        </div>
-                        <>
-                          <button>edit trip</button>
-                          <button
-                            onClick={() => {
-                              handleDelete(trip.id);
-                            }}
-                          >
-                            delete trip
-                          </button>
-                        </>
-                      </div>
+                      <>
+                        
+                          <div className="tripBox">
+                            <div className="tripLocation">
+                              <div>{trip.trip_location}</div>
+                            </div>
+                            <div className="tripDate">
+                              <div>{trip.trip_dates}</div>
+                            </div>
+                            <>
+                              {/* <button>edit trip</button>
+                              <button
+                                onClick={() => {
+                                  handleDelete(trip.id);
+                                }}
+                              >
+                                delete trip
+                              </button> */}
+                            </>
+                          </div>
+                        
+                      </>
                     );
                   })}
                 </>
               )}
+              <div className="tripLocation" >+ NEW TRIP</div>
             </div>
           </div>
         ))}
