@@ -1,6 +1,10 @@
 body {
-    height: 100%;
+    height: 100vh;
     background-color: #dadbf1;
+}
+
+#root {
+    height: 100vh;
 }
 
 .header {
@@ -22,5 +26,5 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url('../actualResized.jpeg');
+    background-image: url('../My project.jpg');
 }

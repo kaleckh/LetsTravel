@@ -76,38 +76,22 @@ function Home() {
             >
               CREATE A TRIP
             </div>
-            <div className="headerItem">MY TRIPS</div>
             <div
+              className="headerItem"
               onClick={() => {
-                setProfileToggle(!profileToggle);
+                Navigate(`/myTrips/${auth.currentUser.uid}`);
               }}
+            >
+              MY TRIPS
+            </div>
+            <div
+              onClick={() => {Navigate(`/profile/${auth.currentUser.uid}`)}}
               className="headerItem"
             >
               MY PROFILE
             </div>
           </div>
         </header>
-        {profileToggle && (
-          <div className="profileToggleContainer">
-            <div className="profileToggleBox">
-              <div
-                onClick={() => {
-                  Navigate(`/myTrips/${auth.currentUser.uid}`);
-                }}
-              >
-                My trips
-              </div>
-              <div
-                onClick={() => {
-                  logout();
-                  Navigate("/login");
-                }}
-              >
-                Logout
-              </div>
-            </div>
-          </div>
-        )}
       </>
 
       {createTrip ? (
@@ -119,6 +103,11 @@ function Home() {
               options={changedData}
               onChange={(obj) => {}}
             />
+          </div>
+          <div className="bottomContainer">
+            <div>Meet new Friends!</div>
+            <div>Check reviews on previous experiences from people</div>
+            <div>Travel the world</div>
           </div>
         </div>
       ) : (
@@ -189,11 +178,6 @@ function Home() {
           )}
         </div>
       )}
-      <div className="bottomContainer">
-        <div>Meet new Freinds!</div>
-        <div>Check reviews on previous experiences from people</div>
-        <div>Travel the world</div>
-      </div>
     </div>
   );
 }

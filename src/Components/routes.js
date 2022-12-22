@@ -5,6 +5,7 @@ import Login from "./Login";
 import Person from "./Person"
 import MyTrips from "./MyTrips"
 import Trip from "./Trip"
+import MyProfile from "./MyProfile"
 
 
 export default (
@@ -15,6 +16,7 @@ export default (
       <Route path="/person/:id" element={<Person/>}/>
       <Route path="/myTrips/:id" element={<MyTrips/>}/>
       <Route path="/trip/:id" element={<Trip/>}/>
+      <Route path="/profile/:id" element={<MyProfile/>}/>
     </Routes>
   </BrowserRouter>
 );

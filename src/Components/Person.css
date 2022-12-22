@@ -19,7 +19,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../actualResized.jpeg');
+    background-image: url('../My project.jpg');
+    flex-direction: column;
 }
 
 .mainBox {

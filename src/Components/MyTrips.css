@@ -5,12 +5,26 @@
 
 .tripContainer {
     display: flex;
-    height: 80vh;
+    height: 100%;
     width: 100vw;
     align-items: center;
     flex-direction: column;
-    background-image: url('../actualResized.jpeg');
+    background-image: url('../My project.jpg');
     /* image-rendering: -webkit-optimize-contrast; */
+    background-repeat: none;
+    background-size: cover;
+}
+
+.createTripContainer {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('../My project.jpg');
+    background-repeat: none;
+    background-size: cover;
+    padding-top: 100px;
 }
 
 .backWrapper {
@@ -23,12 +37,18 @@
     font-size: 65px;
 }
 
+.wholeScreen {
+    height: 100vh;
+    background-image: url('../My project.jpg');
+}
+
 .title {
     font-size: 50px;
     text-decoration: underline;
     margin: 30px;
     font-family: Anton;
-    font-weight: 300;
+    font-weight: 250;
+    letter-spacing: 8px;
 }
 
 .headerButtonContainer {
@@ -46,19 +66,10 @@
     margin-left: 20px;
 }
 
-.createTripContainer {
-    display: flex;
-    width: 100vw;
-    height: 40vh;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
 input {
     padding: 12px;
     margin: 20px;
-    border-radius: 3px;
+    border-radius: 10px;
     width: 600px;
     height: 30px;
 }

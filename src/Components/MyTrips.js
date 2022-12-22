@@ -87,17 +87,19 @@ function MyTrips() {
           >
             CREATE A TRIP
           </div>
-          <div className="headerItem">MY PROFILE</div>
-          <div className="headerItem">MY TRIPS</div>
+          <div onClick={() => {Navigate(`/myTrips/${auth.currentUser.uid}`)}} className="headerItem">MY TRIPS</div>
+          <div onClick={() => {Navigate(`/profile/${auth.currentUser.uid}`)}} className="headerItem">MY PROFILE</div>
         </div>
       </header>
       {isAddingTrip &&
         (isLoading ? (
-          <div>Loading</div>
+          <div className="tripContainer">
+            <div>Loading</div>
+          </div>
         ) : (
-          <div>
+          <div className="wholeScreen">
             <div className="tripContainer">
-              <div className="title">Current Trips</div>
+              <div className="title">CURRENT TRIPS</div>
               {myTrips.length === 0 ? (
                 <>
                   <div className="bigTags">
@@ -140,7 +142,8 @@ function MyTrips() {
           </div>
         ))}
       {isSettingLocation && (
-        <div className="tripContainer">
+      <div className="wholeScreen">
+        <div className="createTripContainer">
           <div className="backWrapper">
             <button
               onClick={() => {
@@ -153,6 +156,7 @@ function MyTrips() {
             </button>
           </div>
           <input
+            className="input"
             placeholder="Where are you going?"
             onChange={(event) => {
               setTripLocation(event.target.value);
@@ -168,9 +172,11 @@ function MyTrips() {
             Next!
           </button>
         </div>
+      </div>
       )}
       {isSettingDate && (
-        <div className="tripContainer">
+      <div className="wholeScreen">
+        <div className="createTripContainer">
           <div className="backWrapper">
             <button
               onClick={() => {
@@ -201,6 +207,7 @@ function MyTrips() {
             Create Trip!
           </button>
         </div>
+      </div>
       )}
     </div>
   );
