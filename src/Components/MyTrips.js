@@ -87,14 +87,30 @@ function MyTrips() {
           >
             CREATE A TRIP
           </div>
-          <div onClick={() => {Navigate(`/myTrips/${auth.currentUser.uid}`)}} className="headerItem">MY TRIPS</div>
-          <div onClick={() => {Navigate(`/profile/${auth.currentUser.uid}`)}} className="headerItem">MY PROFILE</div>
+          <div
+            onClick={() => {
+              Navigate(`/myTrips/${auth.currentUser.uid}`);
+            }}
+            className="headerItem"
+          >
+            MY TRIPS
+          </div>
+          <div
+            onClick={() => {
+              Navigate(`/profile/${auth.currentUser.uid}`);
+            }}
+            className="headerItem"
+          >
+            MY PROFILE
+          </div>
         </div>
       </header>
       {isAddingTrip &&
         (isLoading ? (
-          <div className="tripContainer">
-            <div>Loading</div>
+          <div className="wholeScreen">
+            <div className="tripContainer">
+              <div>Loading</div>
+            </div>
           </div>
         ) : (
           <div className="wholeScreen">
@@ -112,16 +128,15 @@ function MyTrips() {
                   {myTrips.map((trip) => {
                     return (
                       <>
-                        
-                          <div className="tripBox">
-                            <div className="tripLocation">
-                              <div>{trip.trip_location}</div>
-                            </div>
-                            <div className="tripDate">
-                              <div>{trip.trip_dates}</div>
-                            </div>
-                            <>
-                              {/* <button>edit trip</button>
+                        <div onClick={() => {Navigate(`/trip/${auth.currentUser.uid}`)}} className="tripBox">
+                          <div className="tripLocation">
+                            <div>{trip.trip_location}</div>
+                          </div>
+                          <div className="tripDate">
+                            <div>{trip.trip_dates}</div>
+                          </div>
+                          <>
+                            {/* <button>edit trip</button>
                               <button
                                 onClick={() => {
                                   handleDelete(trip.id);
@@ -129,85 +144,84 @@ function MyTrips() {
                               >
                                 delete trip
                               </button> */}
-                            </>
-                          </div>
-                        
+                          </>
+                        </div>
                       </>
                     );
                   })}
                 </>
               )}
-              <div className="tripLocation" >+ NEW TRIP</div>
+              <div className="tripLocation">+ NEW TRIP</div>
             </div>
           </div>
         ))}
       {isSettingLocation && (
-      <div className="wholeScreen">
-        <div className="createTripContainer">
-          <div className="backWrapper">
+        <div className="wholeScreen">
+          <div className="createTripContainer">
+            <div className="backWrapper">
+              <button
+                onClick={() => {
+                  setIsAddingTrip(true);
+                  setIsSettingLocation(false);
+                }}
+                className="back"
+              >
+                back
+              </button>
+            </div>
+            <input
+              className="input"
+              placeholder="Where are you going?"
+              onChange={(event) => {
+                setTripLocation(event.target.value);
+              }}
+              type="text"
+            />
             <button
               onClick={() => {
-                setIsAddingTrip(true);
+                setIsSettingDate(true);
                 setIsSettingLocation(false);
               }}
-              className="back"
             >
-              back
+              Next!
             </button>
           </div>
-          <input
-            className="input"
-            placeholder="Where are you going?"
-            onChange={(event) => {
-              setTripLocation(event.target.value);
-            }}
-            type="text"
-          />
-          <button
-            onClick={() => {
-              setIsSettingDate(true);
-              setIsSettingLocation(false);
-            }}
-          >
-            Next!
-          </button>
         </div>
-      </div>
       )}
       {isSettingDate && (
-      <div className="wholeScreen">
-        <div className="createTripContainer">
-          <div className="backWrapper">
+        <div className="wholeScreen">
+          <div className="createTripContainer">
+            <div className="backWrapper">
+              <button
+                onClick={() => {
+                  setIsSettingDate(false);
+                  setIsSettingLocation(true);
+                }}
+                className="back"
+              >
+                back
+              </button>
+            </div>
+            <input
+              placeholder="What are the dates?"
+              onChange={(event) => {
+                setTripDates(event.target.value);
+              }}
+              type="text"
+            />
             <button
               onClick={() => {
-                setIsSettingDate(false);
-                setIsSettingLocation(true);
+                Promise.all([setIsSettingDate(false), handleSubmit()]).then(
+                  () => {
+                    setIsAddingTrip(true);
+                  }
+                );
               }}
-              className="back"
             >
-              back
+              Create Trip!
             </button>
           </div>
-          <input
-            placeholder="What are the dates?"
-            onChange={(event) => {
-              setTripDates(event.target.value);
-            }}
-            type="text"
-          />
-          <button
-            onClick={() => {
-              Promise.all([setIsSettingDate(false), handleSubmit()]).then(
-                () => {
-                  setIsAddingTrip(true);
-                }
-              );
-            }}
-          >
-            Create Trip!
-          </button>
         </div>
-      </div>
       )}
     </div>
   );

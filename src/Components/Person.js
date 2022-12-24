@@ -85,7 +85,9 @@ function Home() {
               MY TRIPS
             </div>
             <div
-              onClick={() => {Navigate(`/profile/${auth.currentUser.uid}`)}}
+              onClick={() => {
+                Navigate(`/profile/${auth.currentUser.uid}`);
+              }}
               className="headerItem"
             >
               MY PROFILE
@@ -95,21 +97,23 @@ function Home() {
       </>
 
       {createTrip ? (
-        <div className="mainContainer">
-          <div className="mainBox">
-            <div className="title">Where are you going?</div>
-            <Select
-              className="mainInput"
-              options={changedData}
-              onChange={(obj) => {}}
-            />
+        
+          <div className="mainContainer">
+            <div className="mainBox">
+              <div className="title">Where do you want to go?</div>
+              <Select
+                className="mainInput"
+                options={changedData}
+                onChange={(obj) => {}}
+              />
+            </div>
+            <div className="bottomContainer">
+              <div className="bubble">Meet new Friends!</div>
+              <div className="bubble">Check reviews on previous experiences from people</div>
+              <div className="bubble">Travel the world</div>
+            </div>
           </div>
-          <div className="bottomContainer">
-            <div>Meet new Friends!</div>
-            <div>Check reviews on previous experiences from people</div>
-            <div>Travel the world</div>
-          </div>
-        </div>
+        
       ) : (
         <div>
           {isSettingLocation && (
@@ -144,7 +148,8 @@ function Home() {
             </div>
           )}
           {isSettingDate && (
-            <div className="tripContainer">
+            <div className="mainContainer">
+            <div className="mainBox">
               <div className="backWrapper">
                 <button
                   onClick={() => {
@@ -174,6 +179,7 @@ function Home() {
               >
                 Create Trip!
               </button>
+            </div>
             </div>
           )}
         </div>

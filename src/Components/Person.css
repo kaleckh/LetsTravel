@@ -19,8 +19,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../My project.jpg');
+    background-image: url('../photos/My project.jpg');
     flex-direction: column;
+    height: 100vh;
 }
 
 .mainBox {
@@ -37,9 +38,8 @@
 
 .bottomContainer {
     width: 1400px;
-    background-color: black;
     height: 200px;
-    color: white;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -47,4 +47,13 @@
     font-family: inherit;
     margin: 20px;
     border-radius: 25px;
+}
+
+.bubble {
+    font-size: 10px;
+    text-align: center;
+    height: 60px;
+    width: 600;
+    background-color: white;
+    border-radius: 50px;
 }

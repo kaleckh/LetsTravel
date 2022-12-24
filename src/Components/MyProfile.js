@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./MyTrips.css";
+import "./MyProfile.css";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase";
@@ -17,6 +17,8 @@ function MyTrips() {
   const [isSettingLocation, setIsSettingLocation] = useState(false);
   const [isAddingTrip, setIsAddingTrip] = useState(true);
   const [isSettingDate, setIsSettingDate] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const Navigate = useNavigate();
   const { search } = useLocation();
@@ -31,29 +33,11 @@ function MyTrips() {
       method: "get",
       url: `http://localhost:3001/person/${auth.currentUser.email}`,
     }).then((res) => {
-      setMyId(res.data[0].id);
-      axios({
-        method: "get",
-        url: `http://localhost:3001/personTrips/${res.data[0].id}`,
-      }).then((res) => {
-        setIsLoading(false);
-        setMyTrips(res.data);
-      });
+      setFirstName(res.data[0].firstname);
+      setLastName(res.data[0].lastname);
     });
   }, []);
-  const handleSubmit = async (id, location, dates) => {
-    try {
-      let newTrip = await axios.post("http://localhost:3001/newtrip", {
-        id: myId,
-        location: tripLocation,
-        dates: tripDates,
-      });
-      setMyTrips([...myTrips, newTrip.data[0]]);
-      setIsAddingTrip(false);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+
   const handleDelete = async (id) => {
     try {
       let deleteTrip = await axios.delete(
@@ -87,11 +71,58 @@ function MyTrips() {
           >
             CREATE A TRIP
           </div>
-          <div className="headerItem">MY TRIPS</div>
-          <div className="headerItem">MY PROFILE</div>
+          <div onClick={() => {Navigate(`/myTrips/${auth.currentUser.uid}`)}} className="headerItem">MY TRIPS</div>
+          <div onClick={() => {Navigate(`/profile/${auth.currentUser.uid}`)}} className="headerItem">MY PROFILE</div>
         </div>
       </header>
-      <div className="wholeScreen"></div>
+      <div className="profileWholeScreen">
+        <div className="leftProfileContainer">
+          <div className="profileTitle">{firstName}</div>
+          <div className="profileTitle">{lastName}</div>
+          <div>
+            <div className="profileItem">Age: 22</div>
+            <div className="profileItem">{auth.currentUser.email}</div>
+            <div className="profileItem">Insta: </div>
+            <div className="profileItem">
+              Bio: Looking to travel and meet new friends
+            </div>
+            <div className="profileItem">3 Trips Taken</div>
+          </div>
+        </div>
+        <div className="rightProfileContainer">
+          <div>
+            <div className="mainImageContainer">
+              <img
+                className="mainImage"
+                src={require("../photos/kidsFace.jpg")}
+                alt=""
+              />
+              <div className="topImagesContainer">
+                <img className="smallImage" src={require("../photos/kidsFace.jpg")} alt="" />
+                <img className="smallImage" src={require("../photos/kidsFace.jpg")} alt="" />
+              </div>
+            </div>
+            <div className="smallImageContainer">
+              <img
+                className="smallImage"
+                src={require("../photos/kidsFace.jpg")}
+                alt=""
+              />
+              <img
+                className="smallImage"
+                src={require("../photos/kidsFace.jpg")}
+                alt=""
+              />
+              <img
+                className="smallImage"
+                src={require("../photos/kidsFace.jpg")}
+                alt=""
+              />
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@
     width: 100vw;
     align-items: center;
     flex-direction: column;
-    background-image: url('../My project.jpg');
+    background-image: url('../photos/My project.jpg');
     /* image-rendering: -webkit-optimize-contrast; */
     background-repeat: none;
     background-size: cover;
@@ -21,7 +21,7 @@
     width: 100vw;
     align-items: center;
     flex-direction: column;
-    background-image: url('../My project.jpg');
+    background-image: url('../photos/My project.jpg');
     background-repeat: none;
     background-size: cover;
     padding-top: 100px;
@@ -38,8 +38,9 @@
 }
 
 .wholeScreen {
+    display: flex;
     height: 100vh;
-    background-image: url('../My project.jpg');
+    background-image: url('../photos/My project.jpg');
 }
 
 .title {
