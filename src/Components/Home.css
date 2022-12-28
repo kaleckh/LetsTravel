@@ -8,12 +8,13 @@ body {
 }
 
 .header {
-    background-color: black;
+    background-color: none;
     height: 70px;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    border-bottom: 1px solid white;
 }
 
 .headerItem {
