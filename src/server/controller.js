@@ -51,10 +51,10 @@ let newperson = (req, res) => {
 		});
 };
 let newTrip = (req, res) => {
-	console.log(req);
+	console.log(req.body, "this is body");
 	const dbInstance = req.app.get('db');
 	dbInstance
-		.new_trip([ req.body.id, req.body.location, req.body.dates ])
+		.new_trip([ req.body.id, req.body.tripstartdate, req.body.tripenddate ])
 		.then((trips) => {
 			res.status(200).send(trips);
 		})
@@ -118,6 +118,11 @@ let getTrip = (req, res) => {
 			});
 		});
 };
+let newDate = (req, res) => {
+	const dbInstance = req.app.get('db')
+	dbInstance
+	.new_date()
+}
 module.exports = {
 	getpeople,
 	newperson,
@@ -127,5 +132,6 @@ module.exports = {
 	getPersonTrips,
 	newTrip,
 	deletetrip,
-	getTrip
+	getTrip,
+	newDate
 };

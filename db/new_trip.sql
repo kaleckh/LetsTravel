@@ -1,3 +1,3 @@
-insert into trips(person_id, trip_location, trip_dates) values(
+insert into trips(person_id, tripstartdate, tripenddate) values(
 $1, $2, $3
 ) returning *

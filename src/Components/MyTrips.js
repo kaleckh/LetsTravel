@@ -7,6 +7,7 @@ import { auth } from '../Firebase';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import { async } from '@firebase/util';
 
 function MyTrips() {
 	const [ profileToggle, setProfileToggle ] = useState(false);
@@ -21,6 +22,10 @@ function MyTrips() {
 	const [ isSettingDate, setIsSettingDate ] = useState(false);
 	const [ isDeletingTrip, setIsDeletingTrip ] = useState(false);
 	const [ value, onChange ] = useState([ new Date(), new Date() ]);
+	const [startDate, setStartDate] = useState(value[0])
+	const [endDate, setEndDate] = useState(value[1])
+	
+	
 
 	const Navigate = useNavigate();
 	const { search } = useLocation();
@@ -45,12 +50,12 @@ function MyTrips() {
 			});
 		});
 	}, []);
-	const handleSubmit = async (id, location, dates) => {
+	const handleSubmit = async (id, location, startDate, endDate) => {
 		try {
-			let newTrip = await axios.post('http://localhost:3001/newtrip', {
+			let newTrip = await axios.post(`http://localhost:3001/newtrip/${id}`, {
 				id: myId,
-				location: tripLocation,
-				dates: tripDates
+				startDate: startDate,
+				endDate: endDate
 			});
 			setMyTrips([ ...myTrips, newTrip.data[0] ]);
 			setIsAddingTrip(false);
@@ -70,6 +75,21 @@ function MyTrips() {
 		setIsDeletingTrip(false);
 	};
 
+	const changeDateFormat = () => {
+	for(let i = 0; i < value.length; i++) {
+		let day = value[i].getDate()
+		let month = value[i].getMonth()
+		let year = value[i].getFullYear()
+		let fullYear = `${day}/${month + 1}/${year}`
+		if(i === 0) {
+			setStartDate(fullYear)
+		} else {
+			setEndDate(fullYear)
+		}
+	}
+}
+	
+	console.log(value[0].getDate(), 'this is the month')
 	return (
 		<div
 			onClick={() => {
@@ -266,6 +286,7 @@ function MyTrips() {
 								onClick={() => {
 									setIsSettingDate(true);
 									setIsSettingLocation(false);
+									changeDateFormat()
 								}}
 							>
 								Next!
