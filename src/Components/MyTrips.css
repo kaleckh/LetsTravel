@@ -188,6 +188,7 @@ button {
     width: 250px;
     box-sizing: border-box;
     margin-top: 10px;
+    margin: 20px;
     height: 50px;
     display: flex;
     flex-direction: row;

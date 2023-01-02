@@ -65,7 +65,7 @@ function Login() {
 
   const Navigate = useNavigate();
   return (
-    <div>
+    <div className="wholeScreen">
       {!createAccount ? (
         <div className="container">
           <div className="box">

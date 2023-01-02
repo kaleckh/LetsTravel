@@ -49,7 +49,7 @@ function MyTrips() {
 
 	return (
 		<div>
-			<header className="header">
+			<header  className="profileHeader">
 				<div
 					onClick={() => {
 						Navigate(`/person/${auth.currentUser.uid}`);

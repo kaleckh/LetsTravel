@@ -38,7 +38,6 @@ app.get('/person/:email', getPerson);
 app.get('/personTrips/:id', getPersonTrips);
 app.get('/trip/:id', getTrip)
 app.post('/newperson', newperson);
-
 app.post('/newtrip', newTrip);
 app.put('/editperson/:id', editdetails);
 app.delete('/deleteperson/:id', deleteperson);

@@ -11,7 +11,7 @@ let getpeople = (req, res) => {
 };
 let getPerson = (req, res) => {
 	const dbInstance = req.app.get('db');
-	console.log(req);
+
 	dbInstance
 		.get_person([ req.params.email ])
 		.then((peopletravelling) => res.status(200).send(peopletravelling))
@@ -36,7 +36,6 @@ let getPersonTrips = (req, res) => {
 		});
 };
 let newperson = (req, res) => {
-	console.log(req);
 	const dbInstance = req.app.get('db');
 	dbInstance
 		.new_person([ req.body.firstname, req.body.lastname, req.body.email ])
@@ -54,7 +53,7 @@ let newTrip = (req, res) => {
 	console.log(req.body, "this is body");
 	const dbInstance = req.app.get('db');
 	dbInstance
-		.new_trip([ req.body.id, req.body.tripstartdate, req.body.tripenddate ])
+		.new_trip([ req.body.person_id, req.body.triplocation, req.body.tripstartdate, req.body.tripenddate, req.body.tripstate ])
 		.then((trips) => {
 			res.status(200).send(trips);
 		})
